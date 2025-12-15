@@ -26,3 +26,4 @@ C:\Users\Mahmo\OneDrive\Desktop\ProductStore\ProductStore.Api\obj\Debug\net10.0\
 C:\Users\Mahmo\OneDrive\Desktop\ProductStore\ProductStore.Api\obj\Debug\net10.0\ProductStore.Api.pdb
 C:\Users\Mahmo\OneDrive\Desktop\ProductStore\ProductStore.Api\obj\Debug\net10.0\ProductStore.Api.genruntimeconfig.cache
 C:\Users\Mahmo\OneDrive\Desktop\ProductStore\ProductStore.Api\obj\Debug\net10.0\ref\ProductStore.Api.dll
+C:\Users\Mahmo\OneDrive\Desktop\ProductStore\ProductStore.Api\obj\Debug\net10.0\ProductStore.Api.sourcelink.json
