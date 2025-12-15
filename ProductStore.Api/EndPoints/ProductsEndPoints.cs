@@ -14,22 +14,24 @@ public static class ProductsEndPoints
         "Protiens",
         150.50,
         new DateOnly(2026, 1, 1)
-    ),
-    new(
-        2,
-        "Drive Creatine",
-        "Performance",
-        11.50,
-        new DateOnly(2026, 1, 1)
-    ),
-    new(
-        3,
-        "Animal Pak",
-        "Vitamins",
-        80.50,
-        new DateOnly(2026, 1, 1)
-    ),
-];
+        ),
+        new(
+            2,
+            "Drive Creatine",
+            "Performance",
+            11.50,
+            new DateOnly(2026, 1, 1)
+        ),
+        new(
+            3,
+            "Animal Pak",
+            "Vitamins",
+            80.50,
+            new DateOnly(2026, 1, 1)
+        ),
+    ];
+
+    // 2) Extension Method to (Extend WebApp With Our Own Static Map Method)
     public static RouteGroupBuilder MapProductsRoutes(this WebApplication app)
     {
         //Grouping Routes 
