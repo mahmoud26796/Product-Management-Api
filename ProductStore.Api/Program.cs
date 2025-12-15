@@ -10,6 +10,10 @@ builder.Services.AddSqlite<ProductStoreContext>(connStr);
 
 var app = builder.Build();
 
+// calling the Routes Mapping Method
 app.MapProductsRoutes();
+
+// calling the migrate method
+app.MigrateDb();
 
 app.Run();
