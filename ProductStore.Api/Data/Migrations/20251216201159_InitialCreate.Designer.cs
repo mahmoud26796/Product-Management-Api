@@ -11,7 +11,7 @@ using ProductStore.Api.Data;
 namespace ProductStore.Api.Data.Migrations
 {
     [DbContext(typeof(ProductStoreContext))]
-    [Migration("20251215183831_InitialCreate")]
+    [Migration("20251216201159_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
