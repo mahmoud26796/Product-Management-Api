@@ -1,7 +1,8 @@
 namespace ProductStore.Api.EndPoints;
 
 using ProductStore.Api.Contracts;
-
+using ProductStore.Api.Data;
+using ProductStore.Api.Entities;
 
 public static class ProductsEndPoints
 {
@@ -43,20 +44,29 @@ public static class ProductsEndPoints
         group.MapGet("/{id}", (int id) => products.Find(p => p.Id == id)).WithName(productsRouteName);
 
         // creating[posting] a new product
-        group.MapPost("/", (ProductDto newProduct) =>
+        group.MapPost("/", (Product newProduct, ProductStoreContext dbContext) =>
         {
-            ProductDto product = new(
-                products.Count + 1,
-                newProduct.Name,
-                newProduct.Catagory,
-                newProduct.Price,
-                newProduct.ExpDate
+            Product product = new()
+            {
+                Name = newProduct.Name,
+                CatagoryId = newProduct.CatagoryId,
+                Catagory = dbContext.Catagories.Find(newProduct.CatagoryId),
+                Price = newProduct.Price,
+                ExpDate = newProduct.ExpDate
 
+            };
+
+            // adding the new Product to the db context and save the changes to the db
+            dbContext.Products.Add(product);
+            dbContext.SaveChanges();
+            ProductDto productDto = new(
+                product.Id,
+                product.Name!,
+                product.Catagory!.Name,
+                product.Price,
+                product.ExpDate
             );
-
-            products.Add(product);
-
-            return Results.CreatedAtRoute(productsRouteName, new { id = product.Id }, product);
+            return Results.CreatedAtRoute(productsRouteName, new { id = product.Id }, productDto);
         });
 
         // Update an existing product info by Id
