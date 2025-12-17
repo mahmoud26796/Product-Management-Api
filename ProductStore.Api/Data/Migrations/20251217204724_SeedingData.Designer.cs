@@ -11,7 +11,7 @@ using ProductStore.Api.Data;
 namespace ProductStore.Api.Data.Migrations
 {
     [DbContext(typeof(ProductStoreContext))]
-    [Migration("20251216204114_SeedingData")]
+    [Migration("20251217204724_SeedingData")]
     partial class SeedingData
     {
         /// <inheritdoc />
@@ -38,12 +38,12 @@ namespace ProductStore.Api.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Performace"
+                            Name = "Protiens"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Protiens"
+                            Name = "Performace"
                         },
                         new
                         {

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ProductStore.Api.Data.Migrations
 {
     /// <inheritdoc />
@@ -44,6 +46,16 @@ namespace ProductStore.Api.Data.Migrations
                         principalTable: "Catagories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Catagories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Protiens" },
+                    { 2, "Performace" },
+                    { 3, "Vitamins" }
                 });
 
             migrationBuilder.CreateIndex(

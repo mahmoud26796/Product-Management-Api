@@ -35,12 +35,12 @@ namespace ProductStore.Api.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Performace"
+                            Name = "Protiens"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Protiens"
+                            Name = "Performace"
                         },
                         new
                         {

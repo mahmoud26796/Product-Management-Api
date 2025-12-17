@@ -11,7 +11,7 @@ using ProductStore.Api.Data;
 namespace ProductStore.Api.Data.Migrations
 {
     [DbContext(typeof(ProductStoreContext))]
-    [Migration("20251216201159_InitialCreate")]
+    [Migration("20251217204658_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -33,6 +33,23 @@ namespace ProductStore.Api.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Catagories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Protiens"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Performace"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Vitamins"
+                        });
                 });
 
             modelBuilder.Entity("ProductStore.Api.Entities.Product", b =>
