@@ -4,7 +4,7 @@ namespace ProductStore.Api.Contracts;
 
 public record class UpdateProductDto(
     [Required][StringLength(50)] string Name,
-    [Required][StringLength(50)] string Catagory,
+    [Required] int CatagoryId,
     [Required] double Price,
     [Required] DateOnly ExpDate
 );

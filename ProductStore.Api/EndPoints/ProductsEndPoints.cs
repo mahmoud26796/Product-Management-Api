@@ -1,5 +1,6 @@
 namespace ProductStore.Api.EndPoints;
 
+using Microsoft.EntityFrameworkCore;
 using ProductStore.Api.Contracts;
 using ProductStore.Api.Data;
 using ProductStore.Api.Entities;
@@ -52,6 +53,10 @@ public static class ProductsEndPoints
             Product product = Mapper.ToEntity(productById);
             product.Catagory = dbContext.Catagories.Find(productById.CatagoryId);
             return Results.Ok(product);
+            /*
+                Nore: Results is a Class That is Extended From Abstract ActionResult 
+                Which Allow to Return Responses From Our Controller
+            */
 
         }).WithName(productsRouteName);
 
@@ -72,24 +77,23 @@ public static class ProductsEndPoints
         });
 
         // Update an existing product info by Id
-        group.MapPut("/{id}", (int id, UpdateProductDto updatedProduct) =>
+        group.MapPut("/{id}", (int id, UpdateProductDto updatedProduct, ProductStoreContext dbContext) =>
         {
-            var index = products.FindIndex(p => p.Id == id);
-            products[index] = new ProductDto(
-               id,
-               updatedProduct.Name,
-               updatedProduct.Catagory,
-               updatedProduct.Price,
-               updatedProduct.ExpDate
-            );
 
+            var existingProduct = dbContext.Products.Find(id);
+            if (existingProduct is null) return Results.NotFound();
+
+            dbContext.Entry(existingProduct)
+                .CurrentValues.SetValues(Mapper.ToEntity(updatedProduct, id));
+            dbContext.SaveChanges();
             return Results.NoContent();
         });
 
         //delete[remove] a product by Id
-        group.MapDelete("/{id}", (int id) =>
+        group.MapDelete("/{id}", (int id, ProductStoreContext dbContext) =>
         {
-            products.RemoveAll(p => p.Id == id);
+            dbContext.Products.Where(p => p.Id == id).ExecuteDelete();
+            dbContext.SaveChanges();
             return Results.NoContent();
         });
 

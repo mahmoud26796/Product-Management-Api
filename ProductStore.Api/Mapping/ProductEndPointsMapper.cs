@@ -19,6 +19,18 @@ public class Mapper
 
         };
     }
+    public static Product ToEntity(UpdateProductDto updatedProduct, int id)
+    {
+        return new Product
+        {
+            Id = id,
+            Name = updatedProduct.Name,
+            CatagoryId = updatedProduct.CatagoryId,
+            Price = updatedProduct.Price,
+            ExpDate = updatedProduct.ExpDate
+
+        };
+    }
 
     public static ProductDto ToDto(Product product)
     {

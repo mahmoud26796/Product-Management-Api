@@ -18,8 +18,8 @@ public class ProductStoreContext(DbContextOptions<ProductStoreContext> options)
     {
         // creating each catagory name with the associated Id
         modelBuilder.Entity<Catagory>().HasData(
-            new { Id = 1, Name = "Performace" },
-            new { Id = 2, Name = "Protiens" },
+            new { Id = 1, Name = "Protiens" },
+            new { Id = 2, Name = "Performace" },
             new { Id = 3, Name = "Vitamins" }
         );
     }
