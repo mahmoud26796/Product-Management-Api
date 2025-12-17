@@ -3,6 +3,7 @@ namespace ProductStore.Api.EndPoints;
 using ProductStore.Api.Contracts;
 using ProductStore.Api.Data;
 using ProductStore.Api.Entities;
+using ProductStore.Api.Mapping;
 
 public static class ProductsEndPoints
 {
@@ -46,26 +47,16 @@ public static class ProductsEndPoints
         // creating[posting] a new product
         group.MapPost("/", (Product newProduct, ProductStoreContext dbContext) =>
         {
-            Product product = new()
-            {
-                Name = newProduct.Name,
-                CatagoryId = newProduct.CatagoryId,
-                Catagory = dbContext.Catagories.Find(newProduct.CatagoryId),
-                Price = newProduct.Price,
-                ExpDate = newProduct.ExpDate
-
-            };
+            // making a new Entity for the db context
+            Product product = Mapper.ToEntity(newProduct);
+            product.Catagory = dbContext.Catagories.Find(newProduct.CatagoryId);
 
             // adding the new Product to the db context and save the changes to the db
             dbContext.Products.Add(product);
             dbContext.SaveChanges();
-            ProductDto productDto = new(
-                product.Id,
-                product.Name!,
-                product.Catagory!.Name,
-                product.Price,
-                product.ExpDate
-            );
+
+            // creating a productDto to be returned in the response body
+            ProductDto productDto = Mapper.ToDto(product);
             return Results.CreatedAtRoute(productsRouteName, new { id = product.Id }, productDto);
         });
 
