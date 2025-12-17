@@ -38,11 +38,22 @@ public static class ProductsEndPoints
     {
         //Grouping Routes 
         var group = app.MapGroup("products");
-        // get all games
-        group.MapGet("/", () => products);
+        // get all Products
+        group.MapGet("/", (ProductStoreContext dbContext) => dbContext.Products.ToList());
 
-        // get game by id
-        group.MapGet("/{id}", (int id) => products.Find(p => p.Id == id)).WithName(productsRouteName);
+        // get Product by id
+        group.MapGet("/{id}", (int id, ProductStoreContext dbContext) =>
+        {
+            // getting the Product From The Databases
+            Product? productById = dbContext.Products.Find(id);
+
+            if (productById is null)
+                return Results.NotFound();
+            Product product = Mapper.ToEntity(productById);
+            product.Catagory = dbContext.Catagories.Find(productById.CatagoryId);
+            return Results.Ok(product);
+
+        }).WithName(productsRouteName);
 
         // creating[posting] a new product
         group.MapPost("/", (Product newProduct, ProductStoreContext dbContext) =>
