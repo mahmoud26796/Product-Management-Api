@@ -51,9 +51,9 @@ namespace ProductStore.Api.Data.Migrations
 
             modelBuilder.Entity("ProductStore.Api.Entities.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("CatagoryId")
                         .HasColumnType("INTEGER");

@@ -11,8 +11,8 @@ using ProductStore.Api.Data;
 namespace ProductStore.Api.Data.Migrations
 {
     [DbContext(typeof(ProductStoreContext))]
-    [Migration("20251217204724_SeedingData")]
-    partial class SeedingData
+    [Migration("20251220172551_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,9 +54,9 @@ namespace ProductStore.Api.Data.Migrations
 
             modelBuilder.Entity("ProductStore.Api.Entities.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("CatagoryId")
                         .HasColumnType("INTEGER");
