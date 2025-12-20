@@ -19,7 +19,7 @@ public class Mapper
 
         };
     }
-    public static Product ToEntity(UpdateProductDto updatedProduct, int id)
+    public static Product ToEntity(UpdateProductDto updatedProduct, Guid id)
     {
         return new Product
         {
@@ -35,11 +35,11 @@ public class Mapper
     public static ProductDto ToDto(Product product)
     {
         return new ProductDto(
-                product.Id,
-                product.Name!,
-                product.Catagory!.Name,
-                product.Price,
-                product.ExpDate
-            );
+            product.Id,
+            product.Name!,
+            product.Catagory!.Name,
+            product.Price,
+            product.ExpDate
+        );
     }
 }

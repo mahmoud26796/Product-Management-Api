@@ -18,7 +18,7 @@ public static class ProductsEndPoints
         group.MapGet("/", (ProductStoreContext dbContext) => dbContext.Products.ToList());
 
         // get Product by id
-        group.MapGet("/{id}", (int id, ProductStoreContext dbContext) =>
+        group.MapGet("/{id}", (Guid id, ProductStoreContext dbContext) =>
         {
             // getting the Product From The Databases
             Product? productById = dbContext.Products.Find(id);
@@ -52,7 +52,7 @@ public static class ProductsEndPoints
         });
 
         // Update an existing product info by Id
-        group.MapPut("/{id}", (int id, UpdateProductDto updatedProduct, ProductStoreContext dbContext) =>
+        group.MapPut("/{id}", (Guid id, UpdateProductDto updatedProduct, ProductStoreContext dbContext) =>
         {
 
             var existingProduct = dbContext.Products.Find(id);
@@ -65,8 +65,9 @@ public static class ProductsEndPoints
         });
 
         //delete[remove] a product by Id
-        group.MapDelete("/{id}", (int id, ProductStoreContext dbContext) =>
+        group.MapDelete("/{id}", (Guid id, ProductStoreContext dbContext) =>
         {
+            
             dbContext.Products.Where(p => p.Id == id).ExecuteDelete();
             dbContext.SaveChanges();
             return Results.NoContent();
