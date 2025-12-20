@@ -8,32 +8,7 @@ using ProductStore.Api.Mapping;
 
 public static class ProductsEndPoints
 {
-    // 1) data List
     const string productsRouteName = "GetProduct";
-    static readonly List<ProductDto> products = [
-        new(
-        1,
-        "Gold Standarr",
-        "Protiens",
-        150.50,
-        new DateOnly(2026, 1, 1)
-        ),
-        new(
-            2,
-            "Drive Creatine",
-            "Performance",
-            11.50,
-            new DateOnly(2026, 1, 1)
-        ),
-        new(
-            3,
-            "Animal Pak",
-            "Vitamins",
-            80.50,
-            new DateOnly(2026, 1, 1)
-        ),
-    ];
-
     // 2) Extension Method to (Extend WebApp With Our Own Static Map Method)
     public static RouteGroupBuilder MapProductsRoutes(this WebApplication app)
     {
@@ -97,7 +72,6 @@ public static class ProductsEndPoints
             return Results.NoContent();
         });
 
-        // roote route
         return group;
     }
 }
