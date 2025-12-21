@@ -1,4 +1,5 @@
 using ProductStore.Api.Contracts;
+using ProductStore.Api.Contracts.Commands;
 using ProductStore.Api.Entities;
 
 namespace ProductStore.Api.Mapping;
@@ -19,6 +20,7 @@ public class Mapper
 
         };
     }
+
     public static Product ToEntity(UpdateProductDto updatedProduct, Guid id)
     {
         return new Product
@@ -41,5 +43,18 @@ public class Mapper
             product.Price,
             product.ExpDate
         );
+    }
+
+    public static Product ToEntity(ProductCommand command)
+    {
+        return new Product
+        {
+            Id = command.Id,
+            Name = command.Name,
+            Catagory = command.Catagory,
+            CatagoryId = command.CatagoryId,
+            Price = command.Price,
+            ExpDate = command.ExpDate
+        };
     }
 }

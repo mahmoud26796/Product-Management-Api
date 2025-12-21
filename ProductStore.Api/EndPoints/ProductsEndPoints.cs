@@ -5,11 +5,15 @@ using ProductStore.Api.Contracts;
 using ProductStore.Api.Data;
 using ProductStore.Api.Entities;
 using ProductStore.Api.Mapping;
+using MediatR;
+using ProductStore.Api.Contracts.Commands;
 
 public static class ProductsEndPoints
 {
+    // route name
     const string productsRouteName = "GetProduct";
-    // 2) Extension Method to (Extend WebApp With Our Own Static Map Method)
+
+    //Extension Method to (Extend WebApp With Our Own Static Map Method)
     public static RouteGroupBuilder MapProductsRoutes(this WebApplication app)
     {
         //Grouping Routes 
@@ -36,19 +40,10 @@ public static class ProductsEndPoints
         }).WithName(productsRouteName);
 
         // creating[posting] a new product
-        group.MapPost("/", (Product newProduct, ProductStoreContext dbContext) =>
+        group.MapPost("/", (ProductCommand command, ISender sender) =>
         {
-            // making a new Entity for the db context
-            Product product = Mapper.ToEntity(newProduct);
-            product.Catagory = dbContext.Catagories.Find(newProduct.CatagoryId);
-
-            // adding the new Product to the db context and save the changes to the db
-            dbContext.Products.Add(product);
-            dbContext.SaveChanges();
-
-            // creating a productDto to be returned in the response body
-            ProductDto productDto = Mapper.ToDto(product);
-            return Results.CreatedAtRoute(productsRouteName, new { id = product.Id }, productDto);
+            var product = sender!.Send(command);
+            return Results.CreatedAtRoute(productsRouteName, new { id = product.Id });
         });
 
         // Update an existing product info by Id
@@ -67,7 +62,7 @@ public static class ProductsEndPoints
         //delete[remove] a product by Id
         group.MapDelete("/{id}", (Guid id, ProductStoreContext dbContext) =>
         {
-            
+
             dbContext.Products.Where(p => p.Id == id).ExecuteDelete();
             dbContext.SaveChanges();
             return Results.NoContent();
