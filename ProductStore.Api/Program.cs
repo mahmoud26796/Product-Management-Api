@@ -7,6 +7,11 @@ var connStr = builder.Configuration.GetConnectionString("ProductStore");
 // start registering services to Db 
 // injecting services to the Db Context and Connect to the Databases with The Mapped Tables
 builder.Services.AddSqlite<ProductStoreContext>(connStr);
+//Mediatr Config
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssembly(typeof(Program).Assembly);
+});
 // Swagger Services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
