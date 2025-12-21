@@ -20,13 +20,17 @@ public static class ProductsEndPoints
         //Grouping Routes 
         var group = app.MapGroup("products");
         // get all Products
-        group.MapGet("/", (ProductStoreContext dbContext) => dbContext.Products.ToList());
+        group.MapGet("/", async (ProductStoreContext dbContext, ISender sender) =>
+        {
+            var ProductsList = await sender.Send(new GetAllProducts());
+            return ProductsList;
+        });
 
         // get Product by id
         group.MapGet("/{id}", (Guid id, ProductStoreContext dbContext, ISender sender) =>
         {
             var product = sender.Send(new GetProductById(id));
-            return Results.Ok(product);
+            return product;
 
         }).WithName(productsRouteName);
 

@@ -44,7 +44,6 @@ public class Mapper
             product.ExpDate
         );
     }
-
     public static Product ToEntity(ProductCommand command)
     {
         return new Product
