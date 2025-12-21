@@ -7,6 +7,7 @@ using ProductStore.Api.Entities;
 using ProductStore.Api.Mapping;
 using MediatR;
 using ProductStore.Api.Contracts.Commands;
+using ProductStore.Api.Contracts.Queries;
 
 public static class ProductsEndPoints
 {
@@ -22,20 +23,10 @@ public static class ProductsEndPoints
         group.MapGet("/", (ProductStoreContext dbContext) => dbContext.Products.ToList());
 
         // get Product by id
-        group.MapGet("/{id}", (Guid id, ProductStoreContext dbContext) =>
+        group.MapGet("/{id}", (Guid id, ProductStoreContext dbContext, ISender sender) =>
         {
-            // getting the Product From The Databases
-            Product? productById = dbContext.Products.Find(id);
-
-            if (productById is null)
-                return Results.NotFound();
-            Product product = Mapper.ToEntity(productById);
-            product.Category = dbContext.Catagories.Find(productById.CategoryId);
+            var product = sender.Send(new GetProductById(id));
             return Results.Ok(product);
-            /*
-                Nore: Results is a Class That is Extended From Abstract ActionResult 
-                Which Allow to Return Responses From Our Controller
-            */
 
         }).WithName(productsRouteName);
 
