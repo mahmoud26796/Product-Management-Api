@@ -5,9 +5,9 @@ public class Product
     public Guid Id { get; set; }
 
     public string? Name { get; set; }
-    public int CatagoryId { get; set; }
+    public int CategoryId { get; set; }
 
-    public Catagory? Catagory { get; set; }
+    public Category? Category { get; set; }
 
     public double Price { get; set; }
 

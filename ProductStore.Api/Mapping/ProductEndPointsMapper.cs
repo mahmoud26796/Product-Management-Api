@@ -14,7 +14,7 @@ public class Mapper
         return new Product
         {
             Name = product.Name,
-            CatagoryId = product.CatagoryId,
+            CategoryId = product.CategoryId,
             Price = product.Price,
             ExpDate = product.ExpDate
 
@@ -27,7 +27,7 @@ public class Mapper
         {
             Id = id,
             Name = updatedProduct.Name,
-            CatagoryId = updatedProduct.CatagoryId,
+            CategoryId = updatedProduct.CatagoryId,
             Price = updatedProduct.Price,
             ExpDate = updatedProduct.ExpDate
 
@@ -39,7 +39,7 @@ public class Mapper
         return new ProductDto(
             product.Id,
             product.Name!,
-            product.Catagory!.Name,
+            product.Category!.Name,
             product.Price,
             product.ExpDate
         );
@@ -51,8 +51,8 @@ public class Mapper
         {
             Id = command.Id,
             Name = command.Name,
-            Catagory = command.Catagory,
-            CatagoryId = command.CatagoryId,
+            Category = command.Category,
+            CategoryId = command.CategoryId,
             Price = command.Price,
             ExpDate = command.ExpDate
         };

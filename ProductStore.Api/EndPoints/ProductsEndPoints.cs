@@ -30,7 +30,7 @@ public static class ProductsEndPoints
             if (productById is null)
                 return Results.NotFound();
             Product product = Mapper.ToEntity(productById);
-            product.Catagory = dbContext.Catagories.Find(productById.CatagoryId);
+            product.Category = dbContext.Catagories.Find(productById.CategoryId);
             return Results.Ok(product);
             /*
                 Nore: Results is a Class That is Extended From Abstract ActionResult 

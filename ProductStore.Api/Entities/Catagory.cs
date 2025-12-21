@@ -1,6 +1,6 @@
 namespace ProductStore.Api.Entities;
 
-public class Catagory
+public class Category
 {
     public int Id { get; set; }
 

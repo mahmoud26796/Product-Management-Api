@@ -8,4 +8,4 @@ namespace ProductStore.Api.Contracts.Commands;
 public record class CatagoryCommand(
     [Required] Guid Id,
     [Required][StringLength(50)] string Name
-) : IRequest<Catagory>;
+) : IRequest<Category>;

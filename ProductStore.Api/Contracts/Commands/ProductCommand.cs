@@ -8,8 +8,8 @@ namespace ProductStore.Api.Contracts.Commands;
 public record class ProductCommand(
     [Required] Guid Id,
     [Required][StringLength(50)] string Name,
-    [Required] Catagory Catagory,
-    [Required] int CatagoryId,
+    [Required] Category Category,
+    [Required] int CategoryId,
     [Required] double Price,
     [Required] DateOnly ExpDate
 ) : IRequest<Product>;
