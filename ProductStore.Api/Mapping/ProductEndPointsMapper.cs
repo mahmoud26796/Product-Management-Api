@@ -9,11 +9,11 @@ public class Mapper
     /*
         This Class Maps Between DTOs and Entities When Needed
     */
-    public static Product ToEntity(Product product, Guid id)
+    public static Product ToEntity(Product product)
     {
         return new Product
         {
-            Id = id,
+            Id = product.Id,
             Name = product.Name,
             CategoryId = product.CategoryId,
             Price = product.Price,
@@ -22,16 +22,28 @@ public class Mapper
         };
     }
 
-    public static Product ToEntity(UpdateProductDto updatedProduct, Guid id)
+    public static Product ToEntity(UpdateProductCommand command)
     {
         return new Product
         {
-            Id = id,
-            Name = updatedProduct.Name,
-            CategoryId = updatedProduct.CatagoryId,
-            Price = updatedProduct.Price,
-            ExpDate = updatedProduct.ExpDate
+            Name = command.Name,
+            Category = command.Category,
+            CategoryId = command.CategoryId,
+            Price = command.Price,
+            ExpDate = command.ExpDate
+        };
+    }
 
+    public static Product ToEntity(ProductCommand command)
+    {
+        return new Product
+        {
+            Id = command.Id,
+            Name = command.Name,
+            Category = command.Category,
+            CategoryId = command.CategoryId,
+            Price = command.Price,
+            ExpDate = command.ExpDate
         };
     }
 
@@ -45,16 +57,5 @@ public class Mapper
             product.ExpDate
         );
     }
-    public static Product ToEntity(ProductCommand command)
-    {
-        return new Product
-        {
-            Id = command.Id,
-            Name = command.Name,
-            Category = command.Category,
-            CategoryId = command.CategoryId,
-            Price = command.Price,
-            ExpDate = command.ExpDate
-        };
-    }
+
 }
