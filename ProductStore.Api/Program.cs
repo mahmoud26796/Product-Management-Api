@@ -27,7 +27,7 @@ if (app.Environment.IsDevelopment())
 
 // calling the Routes Mapping Method
 app.MapProductsRoutes();
-
+app.MapCategoryRoutes();
 // calling the migrate method
 app.MigrateDb();
 
