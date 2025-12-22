@@ -1,0 +1,1 @@
+namespace ProductStore.Api.Contracts.Commands.Products;

@@ -7,7 +7,7 @@ using ProductStore.Api.Entities;
 using ProductStore.Api.Mapping;
 using MediatR;
 using ProductStore.Api.Contracts.Queries.ProductsQueries;
-using ProductStore.Api.Contracts.Commands.CreateProducts;
+using ProductStore.Api.Contracts.Commands.Products;
 
 public static class ProductsEndPoints
 {

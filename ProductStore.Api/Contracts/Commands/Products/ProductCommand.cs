@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using MediatR;
 using ProductStore.Api.Entities;
 
-namespace ProductStore.Api.Contracts.Commands.CreateProducts;
+namespace ProductStore.Api.Contracts.Commands.Products;
 
 
 public record class ProductCommand(
