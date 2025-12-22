@@ -13,9 +13,8 @@ public class GetProductByIdHandler(ProductStoreContext dbContext) : IRequestHand
     public async Task<Product> Handle(GetProductById request, CancellationToken cancellationToken)
     {
         // getting the Product From The Databases
-        Product? productById = await _dbcontext.Products.FindAsync(request.Id);
-        if (productById is null) throw new Exception("Product Not Found");
-        Product product = Mapper.ToEntity(productById);
+        Product? product = await _dbcontext.Products.FindAsync(request.Id);
+        if (product is null) throw new Exception("Product Not Found");
         return product;
     }
 }
