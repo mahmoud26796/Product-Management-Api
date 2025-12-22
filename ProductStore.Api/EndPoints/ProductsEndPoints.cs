@@ -20,14 +20,14 @@ public static class ProductsEndPoints
         //Grouping Routes 
         var group = app.MapGroup("products");
         // get all Products
-        group.MapGet("/", async (ProductStoreContext dbContext, ISender sender) =>
+        group.MapGet("/", async (ISender sender) =>
         {
             var ProductsList = await sender.Send(new GetAllProducts());
             return ProductsList;
         });
 
         // get Product by id
-        group.MapGet("/{id}", (Guid id, ProductStoreContext dbContext, ISender sender) =>
+        group.MapGet("/{id}", (Guid id, ISender sender) =>
         {
             var product = sender.Send(new GetProductById(id));
             return product;
@@ -37,7 +37,7 @@ public static class ProductsEndPoints
         // creating[posting] a new product
         group.MapPost("/", (ProductCommand command, ISender sender) =>
         {
-            var product = sender!.Send(command);
+            var product = sender.Send(command);
             return Results.CreatedAtRoute(productsRouteName, new { id = product.Id });
         });
 
@@ -55,11 +55,10 @@ public static class ProductsEndPoints
         });
 
         //delete[remove] a product by Id
-        group.MapDelete("/{id}", (Guid id, ProductStoreContext dbContext) =>
+        group.MapDelete("/{id}", async (Guid id, ISender sender) =>
         {
 
-            dbContext.Products.Where(p => p.Id == id).ExecuteDelete();
-            dbContext.SaveChanges();
+            await sender.Send(new DeleteProductById(id));
             return Results.NoContent();
         });
 
