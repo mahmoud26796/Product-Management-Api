@@ -4,6 +4,7 @@ using MediatR;
 using ProductStore.Api.Entities;
 using ProductStore.Api.Data;
 using ProductStore.Api.Mapping;
+using ProductStore.Api.Contracts.Commands.CreateProducts;
 
 public class ProductCommandHandler(ProductStoreContext dbContext) : IRequestHandler<ProductCommand, Product>
 {

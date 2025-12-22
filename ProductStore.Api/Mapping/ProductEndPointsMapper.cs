@@ -1,5 +1,5 @@
 using ProductStore.Api.Contracts;
-using ProductStore.Api.Contracts.Commands;
+using ProductStore.Api.Contracts.Commands.CreateProducts;
 using ProductStore.Api.Entities;
 
 namespace ProductStore.Api.Mapping;

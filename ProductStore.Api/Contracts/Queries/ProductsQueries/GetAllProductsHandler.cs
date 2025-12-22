@@ -4,7 +4,7 @@ using ProductStore.Api.Data;
 using ProductStore.Api.Entities;
 using ProductStore.Api.Mapping;
 
-namespace ProductStore.Api.Contracts.Queries;
+namespace ProductStore.Api.Contracts.Queries.ProductsQueries;
 
 public class GetAllProductsHandler(ProductStoreContext dbContext) : IRequestHandler<GetAllProducts, List<Product>>
 {

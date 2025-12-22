@@ -1,6 +1,7 @@
 namespace ProductStore.Api.Contracts.Queries;
 
 using MediatR;
+using ProductStore.Api.Contracts.Queries.ProductsQueries;
 using ProductStore.Api.Data;
 using ProductStore.Api.Entities;
 using ProductStore.Api.Mapping;

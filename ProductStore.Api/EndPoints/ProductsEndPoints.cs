@@ -6,8 +6,8 @@ using ProductStore.Api.Data;
 using ProductStore.Api.Entities;
 using ProductStore.Api.Mapping;
 using MediatR;
-using ProductStore.Api.Contracts.Commands;
-using ProductStore.Api.Contracts.Queries;
+using ProductStore.Api.Contracts.Queries.ProductsQueries;
+using ProductStore.Api.Contracts.Commands.CreateProducts;
 
 public static class ProductsEndPoints
 {
