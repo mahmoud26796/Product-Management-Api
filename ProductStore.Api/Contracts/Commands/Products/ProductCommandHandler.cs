@@ -13,7 +13,7 @@ public class ProductCommandHandler(ProductStoreContext dbContext) : IRequestHand
     {
         var product = Mapper.ToEntity(request);
         dbContext.Products.Add(product);
-        await dbContext.SaveChangesAsync();
+        await dbContext.SaveChangesAsync(cancellationToken);
         // return product;
         return product;
     }
