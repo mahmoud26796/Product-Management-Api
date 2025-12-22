@@ -11,7 +11,7 @@ public class GetAllProductsHandler(ProductStoreContext dbContext) : IRequestHand
     private readonly ProductStoreContext _dbContext = dbContext;
     public async Task<List<Product>> Handle(GetAllProducts request, CancellationToken cancellationToken)
     {
-        var products = await _dbContext.Products.Select(p => Mapper.ToEntity(p)).ToListAsync();
+        var products = await _dbContext.Products.Select(p => Mapper.ToEntity(p, p.Id)).ToListAsync(cancellationToken);
         return products;
     }
 }
