@@ -7,7 +7,7 @@ namespace ProductStore.Api.Mapping;
 public class Mapper
 {
     /*
-        This Class Maps Between DTOs and Entities When Needed
+        This Class Maps Between DTOs, Commands and Entities When Needed
     */
     public static Product ToEntity(Product product)
     {
