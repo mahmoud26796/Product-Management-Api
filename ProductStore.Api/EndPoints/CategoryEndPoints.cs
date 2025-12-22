@@ -1,7 +1,8 @@
 namespace ProductStore.Api.EndPoints;
 
 using MediatR;
-using ProductStore.Api.Contracts.Commands;
+using ProductStore.Api.Contracts.Commands.Categories;
+using ProductStore.Api.Contracts.Queries.CategoryQueries;
 
 public static class CategoryEndPoints
 {
@@ -9,7 +10,11 @@ public static class CategoryEndPoints
     {
         var group = app.MapGroup("api/categories");
         // get All categories
-        group.MapGet("/", () => { });
+        group.MapGet("/", (ISender sender) =>
+        {
+            var categories = sender.Send(new GetAllCategories());
+            return Results.Ok(categories);
+        });
 
         //get Category By Id
         group.MapGet("/{id}", (int id) => { });
