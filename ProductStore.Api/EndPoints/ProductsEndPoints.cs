@@ -1,10 +1,5 @@
 namespace ProductStore.Api.EndPoints;
 
-using Microsoft.EntityFrameworkCore;
-using ProductStore.Api.Contracts;
-using ProductStore.Api.Data;
-using ProductStore.Api.Entities;
-using ProductStore.Api.Mapping;
 using MediatR;
 using ProductStore.Api.Contracts.Queries.ProductsQueries;
 using ProductStore.Api.Contracts.Commands.Products;
