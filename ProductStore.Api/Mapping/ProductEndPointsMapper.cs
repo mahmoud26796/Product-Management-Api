@@ -9,10 +9,11 @@ public class Mapper
     /*
         This Class Maps Between DTOs and Entities When Needed
     */
-    public static Product ToEntity(Product product)
+    public static Product ToEntity(Product product, Guid id)
     {
         return new Product
         {
+            Id = id,
             Name = product.Name,
             CategoryId = product.CategoryId,
             Price = product.Price,
