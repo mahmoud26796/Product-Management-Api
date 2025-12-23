@@ -8,12 +8,14 @@ public class DeleteProductHandler(ProductStoreContext dbContext) : IRequestHandl
 {
     private readonly ProductStoreContext _dbContext = dbContext;
 
-    public async Task Handle(DeleteProductById request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteProductById request, CancellationToken ct)
     {
-        var product = await _dbContext.Products.FindAsync(request.Id);
-        if (product is null) return;
+        var product = await _dbContext.Products.FindAsync(request.Id, ct) ?? throw new Exception("Prodcut Not Found");
+        var categoryId = product.CategoryId;
 
+        var category = await _dbContext.Categories.FindAsync([categoryId]) ?? throw new Exception("category not found");
+        category.ProductsCount--;
         _dbContext.Products.Remove(product);
-        await _dbContext.SaveChangesAsync(cancellationToken);
+        await _dbContext.SaveChangesAsync(ct);
     }
 }
