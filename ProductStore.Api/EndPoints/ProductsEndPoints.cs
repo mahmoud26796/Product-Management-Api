@@ -13,7 +13,7 @@ public static class ProductsEndPoints
     public static RouteGroupBuilder MapProductsRoutes(this WebApplication app)
     {
         //Grouping Routes 
-        var group = app.MapGroup("products");
+        var group = app.MapGroup("api/products");
         // get all Products
         group.MapGet("/", async (ISender sender) =>
         {
