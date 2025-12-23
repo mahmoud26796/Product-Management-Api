@@ -30,9 +30,9 @@ public static class ProductsEndPoints
         }).WithName(productsRouteName);
 
         // creating[posting] a new product
-        group.MapPost("/", (ProductCommand command, ISender sender) =>
+        group.MapPost("/", async (ProductCommand command, ISender sender) =>
         {
-            var product = sender.Send(command);
+            var product = await sender.Send(command);
             return Results.CreatedAtRoute(productsRouteName, new { id = product.Id });
         });
 

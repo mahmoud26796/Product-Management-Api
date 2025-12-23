@@ -27,7 +27,6 @@ public class Mapper
         return new Product
         {
             Name = command.Name,
-            Category = command.Category,
             CategoryId = command.CategoryId,
             Price = command.Price,
             ExpDate = command.ExpDate
@@ -40,7 +39,6 @@ public class Mapper
         {
             Id = command.Id,
             Name = command.Name,
-            Category = command.Category,
             CategoryId = command.CategoryId,
             Price = command.Price,
             ExpDate = command.ExpDate

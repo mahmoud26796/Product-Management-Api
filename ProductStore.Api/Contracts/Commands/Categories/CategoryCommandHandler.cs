@@ -10,7 +10,7 @@ public class CreateCategoryCommandHandler(ProductStoreContext dbContext) : IRequ
     public async Task<Category> Handle(CreateCategoryCommand req, CancellationToken ct)
     {
         var Category = new Category { Id = req.Id, Name = req.Name };
-        _dbContext.Catagories.Add(Category);
+        _dbContext.Categories.Add(Category);
         await _dbContext.SaveChangesAsync(ct);
         return Category;
     }
