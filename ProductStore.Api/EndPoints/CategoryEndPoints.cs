@@ -17,8 +17,13 @@ public static class CategoryEndPoints
         });
 
         //get Category By Id
-        group.MapGet("/{id}", (int id) => { });
+        group.MapGet("/{id}", (int id, ISender sender) =>
+        {
+            var category = sender.Send(new GetCategoryById(id));
+            return Results.Ok(category);
+        });
 
+        // create new product
         group.MapPost("/", (CreateCategoryCommand command, ISender sender) =>
         {
             var category = sender.Send(command);
