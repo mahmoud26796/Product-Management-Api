@@ -10,7 +10,7 @@ public class GetAllCategoriesHandler(ProductStoreContext dbContext) : IRequestHa
     private readonly ProductStoreContext _dbContext = dbContext;
     public async Task<List<Category>> Handle(GetAllCategories req, CancellationToken ct)
     {
-        var Categories = await _dbContext.Catagories.AsNoTracking().Select(c => new Category { Id = c.Id, Name = c.Name }).ToListAsync(ct);
+        var Categories = await _dbContext.Categories.AsNoTracking().Select(c => new Category { Id = c.Id, Name = c.Name }).ToListAsync(ct);
         return Categories;
     }
 }

@@ -10,7 +10,7 @@ public class GetCategoryByIdHandler(ProductStoreContext dbContext) : IRequestHan
 
     public async Task<Category> Handle(GetCategoryById req, CancellationToken ct)
     {
-        var category = await _dbContext.Catagories.FindAsync(req.Id, ct) ?? throw new Exception("Category Not Found");
+        var category = await _dbContext.Categories.FindAsync(req.Id, ct) ?? throw new Exception("Category Not Found");
         return category;
     }
 }
