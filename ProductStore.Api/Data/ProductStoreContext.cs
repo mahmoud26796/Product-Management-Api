@@ -11,16 +11,16 @@ public class ProductStoreContext(DbContextOptions<ProductStoreContext> options)
     public DbSet<Product> Products => Set<Product>();
 
     // Maps To Catagories Table in DB Context
-    public DbSet<Category> Catagories => Set<Category>();
+    public DbSet<Category> Categories => Set<Category>();
 
     // seeding data so when application runs migrations those basic data will be always there to start with
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // creating each catagory name with the associated Id
+        // creating each Category name with the associated Id
         modelBuilder.Entity<Category>().HasData(
-            new { Id = 1, Name = "Protiens" },
-            new { Id = 2, Name = "Performace" },
-            new { Id = 3, Name = "Vitamins" }
+            new { Id = 1, Name = "Protiens", ProductsCount = 0 },
+            new { Id = 2, Name = "Performace", ProductsCount = 0 },
+            new { Id = 3, Name = "Vitamins", ProductsCount = 0 }
         );
     }
 }
