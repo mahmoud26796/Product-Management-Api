@@ -11,8 +11,8 @@ using ProductStore.Api.Data;
 namespace ProductStore.Api.Data.Migrations
 {
     [DbContext(typeof(ProductStoreContext))]
-    [Migration("20251221202818_updateMigrations")]
-    partial class updateMigrations
+    [Migration("20251224010919_NewUpdates")]
+    partial class NewUpdates
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,25 +30,31 @@ namespace ProductStore.Api.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ProductsCount")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Catagories");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Name = "Protiens"
+                            Name = "Protiens",
+                            ProductsCount = 0
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Performace"
+                            Name = "Performace",
+                            ProductsCount = 0
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Vitamins"
+                            Name = "Vitamins",
+                            ProductsCount = 0
                         });
                 });
 

@@ -11,8 +11,8 @@ using ProductStore.Api.Data;
 namespace ProductStore.Api.Data.Migrations
 {
     [DbContext(typeof(ProductStoreContext))]
-    [Migration("20251220172551_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20251223213956_NewCreate")]
+    partial class NewCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace ProductStore.Api.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.1");
 
-            modelBuilder.Entity("ProductStore.Api.Entities.Catagory", b =>
+            modelBuilder.Entity("ProductStore.Api.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,25 +30,31 @@ namespace ProductStore.Api.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ProductsCount")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Catagories");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Name = "Protiens"
+                            Name = "Protiens",
+                            ProductsCount = 0
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Performace"
+                            Name = "Performace",
+                            ProductsCount = 0
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Vitamins"
+                            Name = "Vitamins",
+                            ProductsCount = 0
                         });
                 });
 
@@ -58,7 +64,7 @@ namespace ProductStore.Api.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CatagoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateOnly>("ExpDate")
@@ -72,20 +78,20 @@ namespace ProductStore.Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CatagoryId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ProductStore.Api.Entities.Product", b =>
                 {
-                    b.HasOne("ProductStore.Api.Entities.Catagory", "Catagory")
+                    b.HasOne("ProductStore.Api.Entities.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CatagoryId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Catagory");
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

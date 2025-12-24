@@ -8,22 +8,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProductStore.Api.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class NewCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Catagories",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    ProductsCount = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Catagories", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -32,7 +33,7 @@ namespace ProductStore.Api.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
-                    CatagoryId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
                     Price = table.Column<double>(type: "REAL", nullable: false),
                     ExpDate = table.Column<DateOnly>(type: "TEXT", nullable: false)
                 },
@@ -40,27 +41,27 @@ namespace ProductStore.Api.Data.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Catagories_CatagoryId",
-                        column: x => x.CatagoryId,
-                        principalTable: "Catagories",
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "Catagories",
-                columns: new[] { "Id", "Name" },
+                table: "Categories",
+                columns: new[] { "Id", "Name", "ProductsCount" },
                 values: new object[,]
                 {
-                    { 1, "Protiens" },
-                    { 2, "Performace" },
-                    { 3, "Vitamins" }
+                    { 1, "Protiens", 0 },
+                    { 2, "Performace", 0 },
+                    { 3, "Vitamins", 0 }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CatagoryId",
+                name: "IX_Products_CategoryId",
                 table: "Products",
-                column: "CatagoryId");
+                column: "CategoryId");
         }
 
         /// <inheritdoc />
@@ -70,7 +71,7 @@ namespace ProductStore.Api.Data.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Catagories");
+                name: "Categories");
         }
     }
 }

@@ -5,7 +5,7 @@
 namespace ProductStore.Api.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedProductProps : Migration
+    public partial class NewUpdates : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
