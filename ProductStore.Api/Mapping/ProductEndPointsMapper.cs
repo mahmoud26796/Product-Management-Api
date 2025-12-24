@@ -16,13 +16,14 @@ public class Mapper
             Id = product.Id,
             Name = product.Name,
             CategoryId = product.CategoryId,
+            Category = product.Category,
             Price = product.Price,
             ExpDate = product.ExpDate
 
         };
     }
 
-    public static Product ToEntity(UpdateProductCommand command)
+    public static Product ToEntity(UpdateProductDto command)
     {
         return new Product
         {
@@ -30,6 +31,18 @@ public class Mapper
             CategoryId = command.CategoryId,
             Price = command.Price,
             ExpDate = command.ExpDate
+        };
+    }
+    public static Product ToEntity(UpdateProductCommandId command)
+    {
+        return new Product
+        {
+            Id = command.Id,
+            Name = command.Data.Name,
+            CategoryId = command.Data.CategoryId,
+            Category = command.Data.Category,
+            Price = command.Data.Price,
+            ExpDate = command.Data.ExpDate
         };
     }
 

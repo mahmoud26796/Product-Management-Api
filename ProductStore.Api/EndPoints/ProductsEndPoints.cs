@@ -3,6 +3,10 @@ namespace ProductStore.Api.EndPoints;
 using MediatR;
 using ProductStore.Api.Contracts.Queries.ProductsQueries;
 using ProductStore.Api.Contracts.Commands.Products;
+using ProductStore.Api.Data;
+using ProductStore.Api.Mapping;
+using ProductStore.Api.Contracts;
+using ProductStore.Api.Entities;
 
 public static class ProductsEndPoints
 {
@@ -37,15 +41,15 @@ public static class ProductsEndPoints
         });
 
         // Update an existing product info by Id
-        group.MapPut("/{id}", async (Guid id, UpdateProductCommandId command, ISender sender) =>
-        { /*
+        group.MapPut("/{id}", async (Guid id, UpdateProductCommand command, ISender sender) =>
+        {/*
             in the Update Product we used a bit different approach so we can pass the correct id from the dbContext
-            that matches the id in the route url so the id is authoritative — we don’t rely on the 
+            that matches the id in the route url so the id is authoritative — we don’t rely on the
             client to send it in the body.
             also we do not need it in the update command record it self since that's no going to ba changed (the Id)
+          
           */
-            if (id == Guid.Empty) return Results.BadRequest();
-            await sender.Send(new UpdateProductCommandId(id, command.Data));
+            await sender.Send(new UpdateProductCommandId(id, command));
             return Results.NoContent();
         });
 

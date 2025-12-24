@@ -13,7 +13,7 @@ public class UpdateProductCommandHandler(ProductStoreContext dbContext) : IReque
     public async Task Handle(UpdateProductCommandId request, CancellationToken ct)
     {
         var existingProduct = await _dbContext.Products.FindAsync(request.Id, ct) ?? throw new Exception("Product Not Found");
-        _dbContext.Entry(existingProduct).CurrentValues.SetValues(Mapper.ToEntity(request.Data));
+        _dbContext.Entry(existingProduct).CurrentValues.SetValues(Mapper.ToEntity(request));
         await _dbContext.SaveChangesAsync(ct);
     }
 }

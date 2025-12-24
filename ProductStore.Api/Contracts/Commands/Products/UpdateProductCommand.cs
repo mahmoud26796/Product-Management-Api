@@ -9,6 +9,7 @@ using ProductStore.Api.Entities;
 public record UpdateProductCommand(
     [Required][StringLength(50)] string Name,
     [Required] int CategoryId,
+     [Required] Category Category,
     [Required] double Price,
     [Required] DateOnly ExpDate
 );
